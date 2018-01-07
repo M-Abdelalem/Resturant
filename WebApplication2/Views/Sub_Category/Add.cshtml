@@ -1,0 +1,53 @@
+﻿@model Models.Sub_Category
+
+@{
+    ViewBag.Title = "Add";
+}
+
+<h2>add</h2>
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="../maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+</head>
+
+<body>
+
+    <div class="container">
+        <br />
+
+
+
+        <form class="form-horizontal" role="form" method="post">
+
+          
+                <label class="control-label col-sm-2" for="email">Name:</label>
+                 
+                    @Html.EditorFor(item => item.sub_category_name, "",new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(item => item.sub_category_name, "", new { @class = "text-danger" })
+               
+          
+            <br />
+                <label class="control-label col-sm-2" for="email">FK_Category:</label>
+                 
+            @Html.DropDownListFor(item => item.Fk_category, new SelectList(ViewBag.fk, "Id", "Name"), new { @class = "form-control" })
+                    @Html.ValidationMessageFor(item => item.Fk_category, "", new { @class = "text-danger" })
+              
+
+            <br />
+
+            @Html.ValidationSummary(false, "", new { @class = "text-danger" })
+            <button type="submit">Create</button>
+        </form>
+        <br />
+        @Html.ActionLink("RETURN", "index")
+    </div>
+
+
+    <script src="../ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min_2.js"></script>
+    <script src="../maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+</body>
+
+</html>

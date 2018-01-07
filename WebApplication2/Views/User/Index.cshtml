@@ -1,0 +1,95 @@
+﻿@model IEnumerable< Models.User>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+   <h2 style="margin-left:120px">User</h2>
+
+
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="../maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+</head>
+
+<body>
+
+    <br />
+    <div class="container" style="width:950px">
+        <form class="form-inline" role="form" method="get">
+            <div class=" form-group">
+                <input name="sershed_text" class="form-control" id="email" placeholder="Enter text">
+
+            </div>
+
+
+            <button type="submit" class="btn btn-danger">search</button>
+
+        </form>
+
+
+            <table class="table">
+                <thead>
+                    <tr>
+                        
+                        <th>Name</th>
+                        <th>password</th>
+                        <th>telephone</th>
+                        <th>address</th>
+                        <th>Role Name</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+
+                    @foreach (var m in Model)
+                    {
+                        <tr class="success">
+                            
+                         
+                            <td>@m.Name</td>
+                            <td>@m.password</td>
+                            <td>@m.telephone</td>
+                            <td>@m.address</td>
+                            
+                            
+                    
+                            
+                       @{  //Name part
+                           string b;
+                        List<DAL.Repository.Get_name_fk> x = ViewBag.fk;
+                        foreach (var n in x)
+                        {
+                            if (n.Id == m.FK_Role)
+                            {
+                                b = n.Name;
+                                <td>@b</td>
+                            } } }
+                            
+
+
+
+                            <td>
+                                @Html.ActionLink("update", "update", new { Id = m.Id, address = m.address, FK_Role = m.FK_Role, Name = m.Name, password = m.password, telephone = m.telephone }) |
+                                @Html.ActionLink("delete", "delete", new { Id = m.Id, address = m.address, FK_Role = m.FK_Role, Name = m.Name, password = m.password, telephone = m.telephone })
+                            </td>
+                        </tr>
+                    }
+
+
+                </tbody>
+
+
+            </table>
+            @Html.ActionLink("CREATE NEW", "Add")
+        </div>
+
+        <script src="../ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min_2.js"></script>
+        <script src="../maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+</body>
+
+
+</html>

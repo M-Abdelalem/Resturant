@@ -1,0 +1,90 @@
+﻿@model IEnumerable< Models.Reservation>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Reservation</h2>
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="../maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+</head>
+
+<body>
+
+    <br />
+    <div class="container" style="width:950px">
+        <form class="form-inline" role="form" method="get">
+
+            <input name="sershed_text" class="form-control" id="email" placeholder="Enter text">
+
+
+
+
+            <button type="submit" class="btn btn-danger">search</button>
+
+        </form>
+
+
+
+        <div class="container">
+
+            <table class="table">
+                <thead>
+                    <tr>
+                        
+                        <th>table_number</th>
+                        <th>time</th>
+                        <th>User name</th>
+
+
+
+                    </tr>
+                </thead>
+
+                <tbody>
+
+                    @foreach (var m in Model)
+                    {
+                        <tr class="success">
+
+                         
+                            <td>@m.table_number</td>
+                            <td>@m.time</td>
+                            @{  //Name part
+                        string b;
+                        List<DAL.Repository.Get_name_fk> x = ViewBag.fk;
+                        foreach (var n in x)
+                        {
+                            if (n.Id == m.Fk_user)
+                            {
+                                b = n.Name;
+                                <td>@b</td>
+                            }
+                        } }
+
+
+                            <td>
+                                @Html.ActionLink("update", "update", new { Id = m.Id, Fk_user = m.Fk_user, table_numbertable_number = m.table_number }) |
+                                @Html.ActionLink("delete", "delete", new { Id = m.Id, Fk_user = m.Fk_user, table_numbertable_number = m.table_number })
+                            </td>
+                        </tr>
+                    }
+
+
+                </tbody>
+
+
+            </table>
+            @Html.ActionLink("CREATE NEW", "Add")
+        </div>
+
+        <script src="../ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min_2.js"></script>
+        <script src="../maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+</body>
+
+
+</html>

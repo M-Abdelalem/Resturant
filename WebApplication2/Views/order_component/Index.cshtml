@@ -1,0 +1,85 @@
+﻿@model IEnumerable< Models.Order_Components>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>order_component</h2>
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="../maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+</head>
+
+<body>
+
+    <br />
+    <div class="container" style="width:950px">
+        <form class="form-inline" role="form" method="get">
+
+            <input name="sershed_text" class="form-control" id="email" placeholder="Enter text">
+
+
+
+
+            <button type="submit" class="btn btn-danger">search</button>
+
+        </form>
+
+        <table class="table">
+            <thead>
+                <tr>
+                    
+                    
+                    <th>Fk_order</th>
+                    <th>item name</th>
+
+
+                </tr>
+            </thead>
+
+            <tbody>
+
+                @foreach (var m in Model)
+                {
+                    <tr class="success">
+
+                       
+                        
+                        <td>@m.Fk_order</td>
+                        @{  //Name part
+                    string b;
+                    List<DAL.Repository.Get_name_fk> x = ViewBag.fk;
+                    foreach (var n in x)
+                    {
+                        if (n.Id == m.Fk_item)
+                        {
+                            b = n.Name;
+                            <td>@b</td>
+                        }
+                    } }
+
+                        <td>
+                            @Html.ActionLink("update", "update", new { Id = m.Id, Name = m.Fk_item, price = m.Fk_order }) |
+                            @Html.ActionLink("delete", "delete", new { Id = m.Id, Name = m.Fk_item, price = m.Fk_order })
+                        </td>
+                    </tr>
+                }
+
+
+            </tbody>
+
+
+        </table>
+        @Html.ActionLink("CREATE NEW", "Add")
+    </div>
+
+    <script src="../ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min_2.js"></script>
+    <script src="../maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+</body>
+
+
+</html>
+
